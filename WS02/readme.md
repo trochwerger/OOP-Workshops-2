@@ -195,7 +195,7 @@ Study your final solution, reread the related parts of the course notes, and mak
 
 Create a **text** file named `reflect.txt` that contains your detailed description of the topics that you have learned in completing this particular workshop and mention any issues that caused you difficulty and how you solved them. Include in your explanation—**but do not limit it to**—the following points:
 - the reason for the significant time difference between the copy and move operations
-- describe approach taken to read the input file (`airport_data.csv`) in the `StringSet` constructor and populate the dynamic array. Is there any way to avoid rereading the file?
+- describe approach taken to read the input file (`gutenberg_shakespeare`) in the `StringSet` constructor and populate the dynamic array. Is there any way to avoid rereading the file?
 - in the links above to `chrono` library, you were directed to use a `steady_clock` to take a timestamp.  Do some research and explain the difference between a `steady_clock` and a `system_clock`.  Are they the same? When should each one be used?
 
 To avoid deductions, refer to code in your solution as examples to support your explanations.
