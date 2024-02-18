@@ -13,8 +13,6 @@
 
 namespace seneca {
 
-
-
     Toy::Toy(const std::string &toy) {
 
         // create a stream from the string
@@ -79,6 +77,13 @@ namespace seneca {
 
     std::ostream &operator<<(std::ostream &os, const Toy &toy) {
         toy.display(os);
+        return os;
+    }
+
+    std::ostream &printLine(std::ostream &os, int width, char fill) {
+        std::string line(width, fill);
+        line += '\n';
+        os << line;
         return os;
     }
 

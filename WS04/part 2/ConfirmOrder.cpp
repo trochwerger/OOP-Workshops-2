@@ -5,7 +5,6 @@
 // I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 
 #include "ConfirmOrder.h"
-#include "Utils.h"
 
 namespace seneca {
 
@@ -119,9 +118,10 @@ namespace seneca {
 
     // Output operator
     std::ostream &operator<<(std::ostream &os, const ConfirmOrder &order) {
-        Utils::printLine(os);
+
+        printLine(os);
         os << "Confirmations to Send\n";
-        Utils::printLine(os);
+        printLine(os);
 
         if (order.m_numToys == 0) {
             os << "There are no confirmations to send!\n";
@@ -133,8 +133,8 @@ namespace seneca {
             }
         }
 
-        Utils::printLine(os);
+        printLine(os);
         return os;
-
     }
+
 } // seneca

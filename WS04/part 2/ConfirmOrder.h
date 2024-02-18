@@ -3,6 +3,7 @@
 // Seneca Email: trochwerger@myseneca.ca
 // Date of Completion: 2024-02-09
 // I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
 #ifndef SENECA_CONFIRMORDER_H
 #define SENECA_CONFIRMORDER_H
 #include "Toy.h"
@@ -40,6 +41,7 @@ namespace seneca {
         // Output operator
         friend std::ostream &operator<<(std::ostream &os, const ConfirmOrder &order);
     };
+
 }// seneca
 
 #endif //SENECA_CONFIRMORDER_H

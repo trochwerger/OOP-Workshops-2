@@ -33,6 +33,9 @@ namespace seneca {
         // Friend function to overload the << operator
         friend std::ostream &operator<<(std::ostream &os, const Toy &toy);
     };
+
+    // Helper function to print a line
+    std::ostream &printLine(std::ostream &os, int width = 26, char fill = '-');
 } // seneca
 
 #endif //SENECA_TOY_H
