@@ -71,6 +71,6 @@ int main(int argc, char** argv)
 			printbar();
 		}
 	}
-	
+
 	return cout;
 }
