@@ -59,14 +59,18 @@ namespace seneca {
 
         out << "----------------------------------------------------------------------------------------\n";
         out << "|";
-        out <<  std::right << std::setw(77) << "Total Listening Time:";
+        printFormatted(out, "Total Listening Time:", " ", 77, ' ', Align::right);
+//        out <<  std::right << std::setw(77) << "Total Listening Time:";
         auto totalLength = std::accumulate(m_song.begin(), m_song.end(), 0, [](unsigned int total, const Song& song) {
             return total + song.m_length;
         });
-        out << std::setw(2) << totalLength / 3600 << ":"
-            << std::setw(2) << (totalLength % 3600) / 60 << ":"
-            << std::setw(2) << totalLength % 60;
-        out << " |" << std::endl;
+//        out << std::setw(2) << totalLength / 3600 << ":"
+        printFormatted(out, totalLength / 3600, ":", 1, ' ', Align::right);
+//            << std::setw(2) << (totalLength % 3600) / 60 << ":"
+        printFormatted(out, (totalLength % 3600) / 60, ":", 2, '0', Align::right);
+//            << std::setw(2) << totalLength % 60;
+        printFormatted(out, totalLength % 60, " |", 2, '0', Align::right);
+        out << std::endl;
     }
 
     void SongCollection::sort(const std::string &field) {

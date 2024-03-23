@@ -14,6 +14,11 @@
 #include <list>
 
 namespace seneca {
+    enum class Align {
+        left,
+        right
+    };
+
     struct Song {
         std::string m_title;
         std::string m_artist;
@@ -36,6 +41,33 @@ namespace seneca {
     std::ostream& operator<<(std::ostream& out, const Song& theSong);
     std::string trim(const std::string &str);
 
+    template <typename T>
+    const std::ostream& printFormatted(std::ostream& os, T item, const char* delim, unsigned int width = 0, char fill = ' ', Align direction = Align::right){
+        // Set alignment based on direction parameter
+        switch (direction) {
+            case Align::left:
+                os.unsetf(std::ios::right);
+                os.setf(std::ios::left);
+                break;
+            case Align::right:
+                os.unsetf(std::ios::left);
+                os.setf(std::ios::right);
+                break;
+        }
+
+        // Set fill and width
+        os.fill(fill);
+        os.width(width);
+
+        // Print item and delimiter if not nullptr
+        os << item;
+        if(delim != nullptr){
+            os << delim;
+        }
+        return os;
+    }
+
 } // seneca
+
 
 #endif //SENECA_SONGCOLLECTION_H
