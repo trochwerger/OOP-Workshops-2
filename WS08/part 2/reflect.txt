@@ -1,0 +1,62 @@
+// Name: Tomas Rochwerger
+// Student Number: 159432210
+// Seneca Email: trochwerger@myseneca.ca
+// Date of Completion: 03/24/2024
+// I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+Smart pointers in C++ are a feature of modern C++ that automatically manage dynamic memory. They ensure that the object to which they point gets destroyed automatically when there is no longer any reference to it. This helps to prevent memory leaks and dangling pointers. In list.h and utilities.cpp, std::unique_ptr is used to add unique_ptr objects of Product to the priceList. When the std::unique_ptr goes out of scope, the destructor for the object is automatically called and the memory is deallocated. This is an advantage over raw pointers, where you have to manually delete the pointer to free the memory.
+
+//List.h
+void operator+=(std::unique_ptr<T>& e) {
+    list.push_back(std::move(*e));
+}
+
+//utilities.cpp
+List<Product> mergeSmart(const List<Description>& desc, const List<Price>& price) {
+    List<Product> priceList;
+    for (size_t i = 0; i < desc.size(); i++) {
+        for (size_t j = 0; j < price.size(); j++) {
+            if (desc[i].code == price[j].code) {
+                std::unique_ptr<Product> p(new Product(desc[i].desc, price[j].price));
+                p->validate();
+                priceList += p;
+            }
+        }
+    }
+    return priceList;
+}
+
+Note that we do not manage the memory of the unique_ptr object in the mergeSmart function, we do not have to delete "p".
+
+Raw pointers are traditional C++ pointers. In the list.h and utilities.cpp, both raw pointers and smart pointers are used. The raw pointer version simply copies the object pointed to by the pointer and adds it to the list, then the object is deleted. The smart pointer version, on the other hand, uses std::move to transfer ownership of the object to the list, ensuring that the object will be properly deleted when it is no longer in use.
+
+//Syntax for raw pointers
+//List.h
+void operator+=(T* e) {
+    list.push_back(*e);
+}
+
+//utilities.cpp
+List<Product> mergeRaw(const List<Description>& desc, const List<Price>& price) {
+		List<Product> priceList;
+        for (size_t i = 0; i < desc.size(); i++) {
+            for (size_t j = 0; j < price.size(); j++) {
+                if (desc[i].code == price[j].code) {
+                    auto* p = new Product(desc[i].desc, price[j].price);
+                    try {
+                        p->validate();
+                        priceList += p;
+                        delete p;
+                    }
+                    catch (const string& msg) {
+                        // First delete the object pointed to by p, if not then it may cause memory leak
+                        delete p;
+                        throw msg;
+                    }
+                }
+            }
+        }
+		return priceList;
+	}
+
+With the raw pointer syntax, you must delete "p" manually after either adding it to the list, or if an exception is thrown. If "p" is deleted after the "throw", it will not be deallocated and cause memory leaks. This is why smart pointers are preferred over raw pointers, as they automatically manage the memory of the object they point to.
